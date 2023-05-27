@@ -29,10 +29,10 @@ jobs:
         base: ${{ github.event.repository.default_branch }}
 
     - name: Run tfsec for Terraform files
-      uses: aquasecurity/tfsec-action@master
+      continue-on-error: true
+      uses: aquasecurity/tfsec-sarif-action@master
       with:
-        format: sarif
-        soft_fail: true
+        sarif_file: tfsec.sarif
         
     - name: Run Bandit for azure-goat Python function
       continue-on-error: true
@@ -41,7 +41,13 @@ jobs:
         path: './azure-goat/modules/module-1/resources/azure_function/data/app'
 
     - name: Upload report from Trivy as Build Artifact
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v3
       with:
         name: ScanReport
         path: 'trivy-results.sarif'
+
+    - name: Upload report from tfsec as Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ScanReport
+        path: 'tfsec.sarif'
