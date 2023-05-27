@@ -67,7 +67,25 @@ From there, we can use the leaked credentials to access the Cosmos database and 
 
 ## Detecting the vulnerability and attempting to stop it before reaeching production
 
-WIP
+Using static analysis tools, we can detect the vulnerability before deploying the application to production.
+In this case we have a [GitHub Action](https://github.com/rpiraces-plain/dotnet2023/actions/workflows/security_scan.yml) which runs the following tools:
+- [Trivy](https://aquasecurity.github.io/trivy): has multiple scanners that look for security issues, and targets where it can find those issues.
+- [TruffleHog](https://github.com/trufflesecurity/trufflehog): to find and verify credentials in this repo.
+- [tfsec](https://aquasecurity.github.io/tfsec): to find security issues in the terraform code.
+- [Bandit](https://bandit.readthedocs.io/en/latest/): to find security issues in the python code.
+
+With these tools we can see in the latest execution of the action that there are several issues in the code, and we can see the details on the run log. We also publish the results in "serif" format, which we can download and see in any compatible tool (ex. [Microsoft Sarif Viewer](https://microsoft.github.io/sarif-web-component/)).
+
+We can see the code causing the SSRF with bandit (along many others not shown in the image):
+![Bandit results](/assets/bandit-results.png)
+
+We can also see some private keys uploaded to the repository with Trivy:
+![Trivy results](/assets/trivy-results.png)
+
+Finally with tfsec, we can see multiple issues as well:
+![tfsec results](/assets/tfsec-results.png)
+
+_**Note**: regarding the credentials obtained in the SSRF with `file:///home/site/wwwroot/local.settings.config`, it does not contain secrets, the secrets are put in there in the deployment process and should not be accessible. **Also note that Static Analysis is NOT a "silver bullet".**_
 
 # Disclaimer
 
