@@ -8,6 +8,7 @@ on:
 jobs:
   scan:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
     - uses: actions/checkout@v3
     - name: Run Trivy vulnerability scanner
@@ -17,7 +18,17 @@ jobs:
         format: 'sarif'
         output: 'trivy-results.sarif'
         severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
-    - name: Upload report as Build Artifact
+    - name: TruffleHog OSS
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: ${{ github.event.repository.default_branch }}
+        head: HEAD
+    - name: Run Bandit for azure-goat Python function
+      uses: jpetrucciani/bandit-check@main
+      with:
+        path: './azure-goat/modules/module-1/resources/azure_function/data/app'
+    - name: Upload report from Trivy as Build Artifact
       uses: actions/upload-artifact@v3.1.2
       with:
         name: ScanReport
