@@ -1,0 +1,24 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
+    - name: Upload report as Build Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: ScanReport
+        path: 'trivy-results.sarif'
