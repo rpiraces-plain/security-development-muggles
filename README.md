@@ -31,13 +31,43 @@ This repository has been modified to **avoid to deploy extra unneded resources f
 
 6. Once in the folder, initialize the terraform state by executing `terraform init`.
 
-7. Deploy the infrastructure by executing `terraform apply`.
+7. Deploy the infrastructure by executing `terraform apply` (the command will prompt for confirmation, confirm the deploy).
 
 8. Wait until the deployment finishes.
 
-9. Once the deployment finishes, you will see the output of the terraform execution, which will contain the main URL of the deployed application.
+9. Once the deployment finishes, you will see the output of the terraform execution, which will contain the main URL of the deployed application (all deployed resources are in the resource group `azuregoat_app`).
 
 _**Note:** the deployed resources incur in charges, make sure to stop the function apps to reduce charges._
+
+## Main vulnerability to exploit
+
+The application has several vulnerabilities and weeknesses, but the main one that we are going to demonstrate is the following:
+
+[SSRF](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery) in the user portal, when submitting a new post.
+
+When we are logged in the application, we can create a new post, and we can specify the URL of the image to be displayed in the post. The application is not secure enough and its vulnerable to SSRF. We can use this vulnerability to make the application to make a request to an internal resource, and get sensitive information from it (with the URI format `file://`):
+![SSRF in azure-goat](/assets/ssrf-azure-goat.png)
+
+**Examples of URIs to use:**
+- `file:///etc/passwd`
+- `file:///proc/self/environ`
+- `file:///home/site/wwwroot/local.settings.config` (this file contains the connection string to the Cosmos database, and the storage account key)
+
+When submitting by clicking the "Upload" button and keeping open the browser "Dev Tools" we can see the request being made to the internal resource, which will return the content of the file in a invalid png file we can download (copying the URL sent in the request in the body property of the JSON object sent in the response):
+
+![Request successfull, SSRF executed](/assets/ssrf-request-successful.png)
+
+When we open the downloaded image in a text editor (such as Notepad++, VSCode or others), we can see the content of the file we requested:
+
+![Leaked credentials](/assets/ssrf-invalid-png-leaked-credentials.png)
+
+From there, we can use the leaked credentials to access the Cosmos database and the storage account, and get more information from there (or modify it, or delete it...).
+
+**Explotation steps:** [Youtube](https://www.youtube.com/watch?v=TVFdorqj2oQ&list=PLcIpBb4raSZGdYHKpqIu5Boc2ziga4oGY&index=2) (specifically the videos named "AzureGoat Exploitation : Server Side Request Forgery Part 1" and "AzureGoat Exploitation : Server Side Request Forgery Part 2").
+
+## Detecting the vulnerability and attempting to stop it before reaeching production
+
+WIP
 
 # Disclaimer
 
