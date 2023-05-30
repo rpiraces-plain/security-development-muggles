@@ -1,0 +1,37 @@
+﻿@page
+@model Demos.Pages.CSPModel
+
+<div class="text-center">
+    <h1 class="display-4">Content Security Policy</h1>
+    <div class="mt-5 mb-5">
+        <!--Inline styles-->
+        <img src="https://dotnetconfspain.com/wp-content/webp-express/webp-images/uploads/2023/04/dotnet23-info.png.webp"
+             class="img-fluid"
+             style="max-width:300px; max-height:300px;">
+    </div>
+</div>
+<div class="mb-3">
+    <!--Inline styles-->
+    <p id="$counter" style="font-size: large">
+        Count:
+    </p>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"
+            integrity="sha256-IY+xwfxy6a9rhm9DC+Kmf6N2OStNsvTb8ydyZxtq5Vw="
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.1.0/dist/jquery.min.js"
+            integrity="sha256-iFHnhEQT7JhgU9fUl8qTKGG4Yi0jabspF3cynCpxPHI="
+            crossorigin="anonymous"></script>
+
+    <script src="~/js/csp.js"></script>
+
+    <!--Inline script-->
+    <script>
+        window.setInterval(
+            "updateCount()",
+            1000);
+    </script>
+}
