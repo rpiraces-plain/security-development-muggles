@@ -20,11 +20,13 @@ name: "Microsoft Defender For Devops"
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
   schedule:
     - cron: '20 23 * * 1'
+  workflow_dispatch:
+  
 
 jobs:
   MSDO:
