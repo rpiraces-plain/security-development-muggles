@@ -1,3 +1,37 @@
 .idea/
 .vs/
+.vscode/
 .env
+
+# .NET Core
+*.dll
+*.exe
+*.pdb
+*.userprefs
+
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+*.bak
+*.cache
+*.log
+*.obj
+
+# Debug 
+
+# Visual Studio
+.vs/
+*.suo
+*.ntvs*
+*.nptlb
+*.resharper*
+*.dotCover
+*.user
+*.builds
+*.pidb
+*.resharper.user
+
+# Test Results
+[Tt]est[Rr]esult*
+[Bb]uild[Ll]og.*
