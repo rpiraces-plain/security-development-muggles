@@ -13,6 +13,10 @@ This repository contains demos performed in the "Desarrollo seguro para Muggles"
 
 This repository has been modified to **avoid to deploy extra unneded resources for this demo**, such as VMs, runbooks and others...
 
+<details>
+
+<summary>**View more about this demo**</summary>
+
 ### Deploying the infrastructure
 
 **Video explanation:** [Youtube](https://www.youtube.com/watch?v=_FIrMr8hDHY).
@@ -39,7 +43,7 @@ This repository has been modified to **avoid to deploy extra unneded resources f
 
 _**Note:** the deployed resources incur in charges, make sure to stop the function apps to reduce charges._
 
-## Main vulnerability to exploit
+### Main vulnerability to exploit
 
 The application has several vulnerabilities and weeknesses, but the main one that we are going to demonstrate is the following:
 
@@ -65,7 +69,7 @@ From there, we can use the leaked credentials to access the Cosmos database and 
 
 **Explotation steps:** [Youtube](https://www.youtube.com/watch?v=TVFdorqj2oQ&list=PLcIpBb4raSZGdYHKpqIu5Boc2ziga4oGY&index=2) (specifically the videos named "AzureGoat Exploitation : Server Side Request Forgery Part 1" and "AzureGoat Exploitation : Server Side Request Forgery Part 2").
 
-## Detecting the vulnerability and attempting to stop it before reaeching production
+### Detecting the vulnerability and attempting to stop it before reaeching production
 
 Using static analysis tools, we can detect the vulnerability before deploying the application to production.
 In this case we have a [GitHub Action](https://github.com/rpiraces-plain/dotnet2023/actions/workflows/security_scan.yml) which runs the following tools:
@@ -87,11 +91,22 @@ Finally with tfsec, we can see multiple issues as well:
 
 _**Note**: regarding the credentials obtained in the SSRF with `file:///home/site/wwwroot/local.settings.config`, it does not contain secrets, the secrets are put in there in the deployment process and should not be accessible. **Also note that Static Analysis is NOT a "silver bullet".**_
 
+</details>
+
 ## broken-access-control
 
 **Upstream repository (from [Pro Code Guide](https://github.com/procodeguide), [Pro Code Guide web](https://procodeguide.com)):** https://github.com/procodeguide/ProCodeGuide.Samples.BrokenAccessControl
 
-WIP
+<details>
+
+<summary>**View more about this demo**</summary>
+WIP  
+
+### Deploying the infrastructure
+### Main vulnerability to exploit
+### Detecting the vulnerability and attempting to stop it before reaeching production
+
+</details>
 
 # Disclaimer
 
