@@ -87,6 +87,12 @@ Finally with tfsec, we can see multiple issues as well:
 
 _**Note**: regarding the credentials obtained in the SSRF with `file:///home/site/wwwroot/local.settings.config`, it does not contain secrets, the secrets are put in there in the deployment process and should not be accessible. **Also note that Static Analysis is NOT a "silver bullet".**_
 
+## broken-access-control
+
+**Upstream repository (from [Pro Code Guide](https://github.com/procodeguide), [Pro Code Guide web](https://procodeguide.com)):** https://github.com/procodeguide/ProCodeGuide.Samples.BrokenAccessControl
+
+WIP
+
 # Disclaimer
 
 **All of this demos and its contents are vulnerable by default for educational and demo purposes only.**
