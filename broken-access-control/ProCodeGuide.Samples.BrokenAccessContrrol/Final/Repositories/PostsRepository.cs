@@ -24,9 +24,9 @@ namespace ProCodeGuide.Samples.BrokenAccessControl.Repositories
             return posts;
         }
 
-        public PostEntity GetById(int id)
+        public PostEntity? GetById(int id)
         {
-            var post = _dbcontext.Posts.Where(post => post.Id == id).First();
+            var post = _dbcontext.Posts.FirstOrDefault(post => post.Id == id);
             return post;
         }
     }

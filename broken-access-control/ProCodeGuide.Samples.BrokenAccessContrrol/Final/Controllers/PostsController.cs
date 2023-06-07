@@ -12,9 +12,9 @@ namespace ProCodeGuide.Samples.BrokenAccessControl.Controllers
     [Authorize]
     public class PostsController : Controller
     {
-        private readonly IPostsService? _postsService = null;
+        private readonly IPostsService? _postsService;
 
-        private readonly IHashids _hashids = null;
+        private readonly IHashids? _hashids;
 
         public PostsController(IPostsService postsService, IHashids hashids)
         {
@@ -24,18 +24,11 @@ namespace ProCodeGuide.Samples.BrokenAccessControl.Controllers
 
         public IActionResult Index()
         {
-            var role = HttpContext.User.FindFirst(ClaimTypes.Role)?.Value;
             var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            // TODO: Refactor
-            List<PostViewModel> posts = _postsService.GetAll(userId)
-                .Select(x => new PostViewModel
-                {
-                    Id = _hashids.Encode(x.Id.GetValueOrDefault()),
-                    CreatedOn = x.CreatedOn,
-                    Description = x.Description,
-                    Title = x.Title
-                }).ToList();
+            var posts = _postsService.GetAll(userId)
+                .Select(x =>  PostViewModel.From(x, _hashids))
+                .ToList();
             return View(posts);
         }
 
@@ -54,15 +47,7 @@ namespace ProCodeGuide.Samples.BrokenAccessControl.Controllers
 
         public IActionResult Details([ModelBinder(typeof(HashidsModelBinder))] int id)
         {
-            // TODO: Refactor
-            var post = _postsService.GetById(id);
-            var postViewModel = new PostViewModel
-            {
-                Id = _hashids.Encode(post.Id.GetValueOrDefault()),
-                CreatedOn = post.CreatedOn,
-                Description = post.Description,
-                Title = post.Title
-            };
+            var postViewModel = PostViewModel.From(_postsService.GetById(id), _hashids);
             return View(postViewModel);
         }
     }

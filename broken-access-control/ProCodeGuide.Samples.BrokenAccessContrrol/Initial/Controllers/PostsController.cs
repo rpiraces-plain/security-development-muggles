@@ -42,7 +42,7 @@ namespace ProCodeGuide.Samples.BrokenAccessControl.Controllers
 
         public IActionResult Details(int id)
         {
-            Post post = _postsService.GetById(id);
+            var post = _postsService.GetById(id);
             return View(post);
         }
     }

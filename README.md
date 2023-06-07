@@ -97,14 +97,49 @@ _**Note**: regarding the credentials obtained in the SSRF with `file:///home/sit
 
 **Upstream repository (from [Pro Code Guide](https://github.com/procodeguide), [Pro Code Guide web](https://procodeguide.com)):** https://github.com/procodeguide/ProCodeGuide.Samples.BrokenAccessControl
 
+This repository has been modified to **improve security and some customization for this demo**.
+One very important change is the use of [HashIds](https://hashids.org/) for posts ids (instead of sequential numbers), which makes it harder to guess the id of a post and access it.
+Posts are kept stored in the DB with the original id, and the HashId is generated on the fly when needed to be provided to the user.
+
 <details>
 
-<summary>**View more about this demo**</summary>
-WIP  
+<summary>**View more about this demo**</summary>  
 
 ### Deploying the infrastructure
+
+**Step by step:**
+
+1. Login into your Azure account in [portal.azure.com](https://portal.azure.com/).
+
+2. Create a Azure SQL Server instance (minimum tier recommended).
+
+3. Create two Databases in the SQL Server instance, one named `brokenaccesscontrol` and another named `brokenaccesscontrol_fixed`.
+
+4. Create an App Service Plan (minimum tier recommended).
+
+5. Create two Web Apps in the App Service Plan, try to give them different and coherent names to differentiate them.
+
+6. Clone this repository in your shell: `git clone https://github.com/rpiraces-plain/dotnet2023`
+
+7. Get into the folder `./broken-access-control` folder of this repository by executing `cd dotnet2023/broken-access-control`.
+
+8. Open the main solution file `ProCodeGuide.Samples.BrokenAccessControl.sln` in Visual Studio (Rider or your IDE of preference).
+
+9. Build the application in order to publish it as a package (you can use extensions to directly deploy to your created resources). Ensure that the `appsettings.json` contains the correct connection string to the SQL Server instance and the correct database name as well as the `Hashids` section for the 'Final' (the fixed one) project.
+
+10. Wait until the deployment finishes.
+
+11. You are done! You can access both vulnerable and "security hardened" versions of the web in different URLs and check for the main vulnerability to exploit.
+
+_**Note:** the deployed resources incur in charges, make sure to stop/delete the web apps and SQL server to reduce charges._
+
 ### Main vulnerability to exploit
+
+WIP
+
 ### Detecting the vulnerability and attempting to stop it before reaeching production
+
+WIP
 
 </details>
 

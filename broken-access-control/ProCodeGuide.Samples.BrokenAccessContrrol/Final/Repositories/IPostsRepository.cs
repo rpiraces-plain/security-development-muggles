@@ -6,6 +6,6 @@ namespace ProCodeGuide.Samples.BrokenAccessControl.Repositories
     {
         string Create(PostEntity post);
         List<PostEntity> GetAll(string CreatedBy);
-        PostEntity GetById(int id);
+        PostEntity? GetById(int id);
     }
 }

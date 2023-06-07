@@ -43,10 +43,11 @@ namespace ProCodeGuide.Samples.BrokenAccessControl.Services
             return posts;
         }
 
-        public Post GetById(int id)
+        public Post? GetById(int id)
         {
-            PostEntity postEntity = _postRepository.GetById(id);
-            Post post = new Post()
+            var postEntity = _postRepository.GetById(id);
+            if (postEntity is null) return null;
+            var post = new Post
             {
                 Id = postEntity.Id,
                 Title = postEntity.Title,

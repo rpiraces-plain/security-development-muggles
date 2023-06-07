@@ -15,12 +15,6 @@ public static class ServiceCollectionExtensions
             var hashids = new Hashids(options.Salt, options.MinHashLength, options.Alphabet, options.Steps);
             return hashids;
         });
-
-        // TODO: check
-        services.PostConfigure<RouteOptions>(setup =>
-        {
-            setup.ConstraintMap.Add("hashids", typeof(HashidsRouteConstraint));
-        });
         return services;
     }
 }

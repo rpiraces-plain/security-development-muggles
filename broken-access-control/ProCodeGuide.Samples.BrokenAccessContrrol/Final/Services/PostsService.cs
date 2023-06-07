@@ -49,24 +49,26 @@ namespace ProCodeGuide.Samples.BrokenAccessControl.Services
             return posts;
         }
 
-        public Post GetById(int id)
+        public Post? GetById(int id)
         {
-            PostEntity postEntity = _postRepository.GetById(id);
+            var postEntity = _postRepository.GetById(id);
+            if (postEntity is null) return null;
 
             var authorizationResult = _authorizationService.AuthorizeAsync
                 (_httpContextAccessor.HttpContext.User, postEntity, "IsPostOwnerPolicy");
-
-            Post post = new Post();
-
+            
             if (authorizationResult.Result.Succeeded)
             {
-                post.Id = postEntity.Id;
-                post.Title = postEntity.Title;
-                post.CreatedOn = postEntity.CreatedOn;
-                post.Description = postEntity.Description;
+                return new Post
+                {
+                    Id = postEntity.Id,
+                    Title = postEntity.Title,
+                    CreatedOn = postEntity.CreatedOn,
+                    Description = postEntity.Description
+                };
             }
 
-            return post;
+            return null;
         }
     }
 }

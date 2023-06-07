@@ -7,6 +7,6 @@ namespace ProCodeGuide.Samples.BrokenAccessControl.Services
     {
         string Create(Post post, string createdBy);
         List<Post> GetAll(string CreatedBy);
-        Post GetById(int id);
+        Post? GetById(int id);
     }
 }
