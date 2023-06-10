@@ -3,6 +3,76 @@
 
 This repository contains demos performed in the "Desarrollo seguro para Muggles" talk in the dotnet2023 tech conference.
 
+# Available actions
+
+In this repository we have enabled several [GitHub Actions](https://docs.github.com/en/actions) to perform different tasks, listed below.
+These are mainly focused to perform security analysis of the code, and to detect vulnerabilities in the code and in the dependencies.
+The are other actions to simply build some of the demos and provide them out-of-the-box to use them.
+
+## CodeQL analysis
+
+**Purpose: perform static analysis of all the code in this repository.**
+
+Workflow in [./.github/workflows/code_ql.yml](./.github/workflows/code_ql.yml).
+
+With [CodeQL](https://codeql.github.com/) we can perform static analysis of the code, and detect vulnerabilities in the code and in the dependencies.
+It's provided by GitHub in a very simple way to use it, and it's free for public repositories to set-up and integrate with the "Security" tab in the repository.
+Nevertheless, we can use it in private repositories, and we can also use it in our local machines (via CLI).
+
+In this case the CodeQL action is only meant to be executed on manual demand, and not in every push to the repository (via the `workflow_dispatch` event), for demo purposes.
+
+The action will list all available languages by executing a Python script and try to autobuild all the compiled languages, and then it will execute the CodeQL analysis for all the languages that have been built successfully (if any), along the analysis for the rest of the languages.
+
+We can see the results of this analysis in the "Security" tab of the repository, in the "Code scanning alerts" section.
+
+_**Sources used:** [thedave42/multi-lang-monorepo](https://github.com/thedave42/multi-lang-monorepo)._
+
+## Microsoft Defender for DevOps scan
+
+**Purpose: perform static analysis of all the code in this repository with multiple OSS tools for this (the ones defined by Microsoft Defender for DevOps action). We could see them in Microsoft Defender for Cloud in our Azure Subscription.**
+
+Workflow in [./.github/workflows/microsoft_defender_devops.yml](./.github/workflows/microsoft_defender_devops.yml).
+
+This action only executes the [Microsoft Defender for DevOps action](https://github.com/microsoft/security-devops-action) with the default configuration, which is to execute the following tools:
+- [AntiMalware](https://www.microsoft.com/en-us/windows/comprehensive-security): will inspect the code and artifacts for malware.
+- [Bandit](https://github.com/PyCQA/bandit): a tool designed to find common security issues in Python code (we are using Python for some demos).
+- [BinSkim](https://github.com/Microsoft/binskim): a binary static analysis tool that provides security and correctness results for Windows Portable Executable and *nix ELF binary formats.
+- [ESlint](https://github.com/eslint/eslint): a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
+- [Template Analyzer](https://github.com/Azure/template-analyzer): a tool for identifying security and compliance issues in Azure Resource Manager (ARM) templates and Bicep files.
+- [Terrascan](https://github.com/accurics/terrascan): a static code analyzer for Terraform.
+- [Trivy](https://github.com/aquasecurity/trivy): all-in-one security scanner to detect vulnerabilities & IaC  misconfigurations, risks and others.
+
+The action also publishes a [SARIF](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif) file as an artifact, which can be used to integrate with other tools, and inspected for example using [Microsoft SARIF Viewer](https://microsoft.github.io/sarif-web-component/).
+
+This SARIF report will be also integrated and available in the "Security" tab of the repository, in the "Code scanning alerts" section along with others scan results. Also, alerts will be present in Microsoft Defender for Cloud in our Azure Subscription.
+
+## Security scan
+
+**Purpose: perform static analysis of all the code in this repository with multiple OSS tools for this.**
+
+Workflow in [./.github/workflows/security_scan.yml](./.github/workflows/security_scan.yml).
+
+With this action we use the following tools to perform static analysis of the code, and detect vulnerabilities in the code and in the dependencies (and secrets in the code):
+- [trivy](https://trivy.dev/): all-in-one security scanner to detect vulnerabilities & IaC  misconfigurations, risks and others.
+- [TruffleHog](https://github.com/trufflesecurity/trufflehog): utility to search Git repositories for secrets, digging deep into commit history and branches. This is used to detect secrets in the code.
+- [tfsec](https://github.com/aquasecurity/tfsec): Security scanner for Terraform code (used for some demos).
+- [bandit](https://github.com/PyCQA/bandit): a tool designed to find common security issues in Python code (we are using Python for some demos).
+
+The action also publishes a [SARIF](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif) file as an artifact, which can be used to integrate with other tools, and inspected for example using [Microsoft SARIF Viewer](https://microsoft.github.io/sarif-web-component/).
+
+## Others:
+
+### Build spy-extension
+
+**Purpose: build the [spy-extension](./spy-extension) and publish it as a GitHub release.**
+
+Workflow in [./.github/workflows/build-spy-extension.yml](./.github/workflows/build-spy-extension.yml).
+
+With the artifact published, we can download the extension and install it in our browser (in development mode, unpacked).
+With this extension we can intercept a lot of things that happen in the target browser, and use them (ex. requests, responses, cookies...).
+
+Go to the actions tab, and select the workflow "CI Build for spy-extension", and click on the latest run. In the summary details, you can see in the "Artifacts" section the zip ready to download and use.
+
 # Available demos
 
 ## azure-goat
@@ -132,6 +202,40 @@ Posts are kept stored in the DB with the original id, and the HashId is generate
 11. You are done! You can access both vulnerable and "security hardened" versions of the web in different URLs and check for the main vulnerability to exploit.
 
 _**Note:** the deployed resources incur in charges, make sure to stop/delete the web apps and SQL server to reduce charges._
+
+### Main vulnerability to exploit
+
+WIP
+
+### Detecting the vulnerability and attempting to stop it before reaeching production
+
+WIP
+
+</details>
+
+## spy-extension
+
+**Upstream repository (from [Matt Frisbie](https://github.com/msfrisbie), [Matt Frisbie web](https://www.mattfriz.com/)):** https://github.com/msfrisbie/spy-extension
+
+**LICENSE: [MIT](./spy-extension/LICENSE)**
+
+This repository has been modified to **upgrade dependencies**.
+
+<details>
+
+<summary>**View more about this demo**</summary>  
+
+**Video explanation:** [Youtube](https://www.youtube.com/watch?v=cIGESSm39n4).
+**Related article:** [Substack](https://mattfrisbie.substack.com/p/spy-chrome-extension).
+
+### Building the extension
+
+WIP
+**Step by step:**
+
+
+### Installing and inspecting the extension
+WIP
 
 ### Main vulnerability to exploit
 

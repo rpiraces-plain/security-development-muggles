@@ -1,47 +1,64 @@
-
-name: "Code Scanning - Action"
-
+name: CodeQL Scan
 on:
   workflow_dispatch:
 
+
 jobs:
-  CodeQL-Build:
-    # CodeQL runs on ubuntu-latest, windows-latest, and macos-latest
+  generate-scan-list:
+    name: Generate scan list
     runs-on: ubuntu-latest
-
-    permissions:
-      # required for all workflows
-      security-events: write
-
-      # only required for workflows in private repositories
-      actions: read
-      contents: read
+    outputs:
+      matrix: ${{steps.set-matrix.outputs.matrix}}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      # Initializes the CodeQL tools for scanning.
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
         with:
-          languages: javascript, csharp, python
+          fetch-depth: 0
 
-      # Autobuild attempts to build any compiled languages (C/C++, C#, Go, or Java).
-      # If this step fails, then you should remove it and run the build manually (see below).
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
+      - name: Find all apps    
+        id: find-all
+        run: |
+          echo "::set-output name=all::$(./.github/scripts/list-all)"
 
-      # ℹ️ Command-line programs to run using the OS shell.
-      # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+      - name: Setup scanning matrix
+        id: set-matrix
+        env:
+          ALL: ${{ steps.find-all.outputs.all }}
+        run: |
+          echo "::set-output name=matrix::$ALL"
+          echo "::notice::Scan list: $ALL"
 
-      # ✏️ If the Autobuild fails above, remove it and uncomment the following
-      #    three lines and modify them (or add more) to build your code if your
-      #    project uses a compiled language
+  codeql-scan:
+    name: "CodeQL(${{ matrix.languages }}): ${{matrix.target-dir}}"
+    needs: generate-scan-list
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.generate-scan-list.outputs.matrix) }}
 
-      #- run: |
-      #     make bootstrap
-      #     make release
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+    - name: Build CodeQL config file
+      env:
+        TARGET_DIR: ${{ matrix.target-dir }}
+      run: |
+        cp .github/codeql/codeql-config-template.yml codeql-config.yml
+        sed -i 's@__TARGET_DIR__@'"$TARGET_DIR"'@' codeql-config.yml
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        config-file: codeql-config.yml
+        languages: ${{ matrix.languages }}
+
+    - name: Attempting build
+      if: ${{ (matrix.languages == 'cpp' || matrix.languages == 'csharp' || matrix.languages == 'java') }}
+      uses: github/codeql-action/autobuild@v2
+
+    - name: Perform CodeQL analysis
+      uses: github/codeql-action/analyze@v2
+      with:
+        category: ${{ matrix.target-dir }}-${{ matrix.languages }}
