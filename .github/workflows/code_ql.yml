@@ -19,6 +19,7 @@ jobs:
       - name: Find all apps    
         id: find-all
         run: |
+          chmod +x ./.github/scripts/list-all
           echo "::set-output name=all::$(./.github/scripts/list-all)"
 
       - name: Setup scanning matrix
