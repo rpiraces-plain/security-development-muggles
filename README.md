@@ -9,7 +9,7 @@ In this repository we have enabled several [GitHub Actions](https://docs.github.
 These are mainly focused to perform security analysis of the code, and to detect vulnerabilities in the code and in the dependencies.
 The are other actions to simply build some of the demos and provide them out-of-the-box to use them.
 
-## CodeQL analysis
+## CodeQL Scan
 
 **Purpose: perform static analysis of all the code in this repository.**
 
@@ -27,7 +27,7 @@ We can see the results of this analysis in the "Security" tab of the repository,
 
 _**Sources used:** [thedave42/multi-lang-monorepo](https://github.com/thedave42/multi-lang-monorepo)._
 
-## Microsoft Defender for DevOps scan
+## Microsoft Defender for DevOps
 
 **Purpose: perform static analysis of all the code in this repository with multiple OSS tools for this (the ones defined by Microsoft Defender for DevOps action). We could see them in Microsoft Defender for Cloud in our Azure Subscription.**
 
@@ -46,7 +46,7 @@ The action also publishes a [SARIF](https://www.oasis-open.org/committees/tc_hom
 
 This SARIF report will be also integrated and available in the "Security" tab of the repository, in the "Code scanning alerts" section along with others scan results (if enabled). Also, alerts will be present in Microsoft Defender for Cloud in our Azure Subscription.
 
-## Security scan
+## Security Scan
 
 **Purpose: perform static analysis of all the code in this repository with multiple OSS tools for this.**
 
