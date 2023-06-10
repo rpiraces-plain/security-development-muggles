@@ -31,7 +31,7 @@ on:
 jobs:
   MSDO:
     name: Microsoft Security DevOps Analysis
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions:
       actions: read
       contents: read
@@ -53,8 +53,6 @@ jobs:
     - name: Run Microsoft Security DevOps Analysis
       uses: microsoft/security-devops-action@preview
       id: msdo
-      with:
-        config: msdo.gdnconfig
 
       # Upload alerts to the Security tab
     - name: Upload alerts to Security tab
