@@ -40,7 +40,7 @@ jobs:
 
     - name: Run Bandit for azure-goat Python function
       continue-on-error: true
-      uses: rpiraces-plain/bandit-check@master
+      uses: jpetrucciani/bandit-check@master
       with:
         path: './azure-goat/modules/module-1/resources/azure_function/data/app'
         bandit_flags: '--format sarif --output bandit.sarif'
