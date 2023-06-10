@@ -31,17 +31,13 @@ on:
 jobs:
   MSDO:
     name: Microsoft Security DevOps Analysis
-
-    # MSDO runs on windows-latest.
-    # ubuntu-latest and macos-latest supporting coming soon
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions:
       actions: read
       contents: read
       security-events: write
 
     steps:
-      
       # Checkout your code repository to scan
     - uses: actions/checkout@v3
 
@@ -57,6 +53,8 @@ jobs:
     - name: Run Microsoft Security DevOps Analysis
       uses: microsoft/security-devops-action@preview
       id: msdo
+      with:
+        config: msdo.gdnconfig
 
       # Upload alerts to the Security tab
     - name: Upload alerts to Security tab
