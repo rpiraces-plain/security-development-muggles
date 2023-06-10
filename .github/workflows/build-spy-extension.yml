@@ -1,4 +1,4 @@
-name: CI Build for spy-extension
+name: Build spy-extension
 on:
   push:
     branches: [ main ]
