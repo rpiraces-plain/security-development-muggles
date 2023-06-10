@@ -219,6 +219,35 @@ WIP
 
 </details>
 
+## broken-access-control (frontend guard)
+
+**Upstream repository (from [OWASP Juice Shop](https://github.com/juice-shop), [OWASP Juice Shop webpage](https://owasp.org/www-project-juice-shop/)):** https://github.com/juice-shop/juice-shop
+
+**LICENSE: [MIT](https://github.com/juice-shop/juice-shop/blob/master/LICENSE)**
+
+**Main web:** [JuiceShop](https://juice-shop.herokuapp.com/).
+
+<details>
+
+<summary>**View more about this demo**</summary>
+
+### Deploying the infrastructure
+
+No infrastructure to deploy by now! 🎉 (nevertheless you can always deploy your own version, checkout the [main repository](https://github.com/juice-shop/juice-shop)).
+
+Just access the JuiceShop web and start hacking! at [JuiceShop](https://juice-shop.herokuapp.com/).
+
+### Main vulnerability to exploit
+
+WIP
+
+### Detecting the vulnerability and attempting to stop it before reaeching production
+
+WIP
+
+</details>
+
+
 ## spy-extension
 
 **Upstream repository (from [Matt Frisbie](https://github.com/msfrisbie), [Matt Frisbie web](https://www.mattfriz.com/)):** https://github.com/msfrisbie/spy-extension
