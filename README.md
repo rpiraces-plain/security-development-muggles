@@ -23,7 +23,7 @@ In this case the CodeQL action is only meant to be executed on manual demand, an
 
 The action will list all available languages by executing a Python script and try to autobuild all the compiled languages, and then it will execute the CodeQL analysis for all the languages that have been built successfully (if any), along the analysis for the rest of the languages.
 
-We can see the results of this analysis in the "Security" tab of the repository, in the "Code scanning alerts" section.
+We can see the results of this analysis in the "Security" tab of the repository, in the "Code scanning alerts" section (if enabled).
 
 _**Sources used:** [thedave42/multi-lang-monorepo](https://github.com/thedave42/multi-lang-monorepo)._
 
@@ -44,7 +44,7 @@ This action only executes the [Microsoft Defender for DevOps action](https://git
 
 The action also publishes a [SARIF](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif) file as an artifact, which can be used to integrate with other tools, and inspected for example using [Microsoft SARIF Viewer](https://microsoft.github.io/sarif-web-component/).
 
-This SARIF report will be also integrated and available in the "Security" tab of the repository, in the "Code scanning alerts" section along with others scan results. Also, alerts will be present in Microsoft Defender for Cloud in our Azure Subscription.
+This SARIF report will be also integrated and available in the "Security" tab of the repository, in the "Code scanning alerts" section along with others scan results (if enabled). Also, alerts will be present in Microsoft Defender for Cloud in our Azure Subscription.
 
 ## Security scan
 
@@ -59,6 +59,8 @@ With this action we use the following tools to perform static analysis of the co
 - [bandit](https://github.com/PyCQA/bandit): a tool designed to find common security issues in Python code (we are using Python for some demos).
 
 The action also publishes a [SARIF](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif) file as an artifact, which can be used to integrate with other tools, and inspected for example using [Microsoft SARIF Viewer](https://microsoft.github.io/sarif-web-component/).
+
+This SARIF report will be also integrated and available in the "Security" tab of the repository, in the "Code scanning alerts" section along with others scan results (if enabled). Also, alerts will be present in Microsoft Defender for Cloud in our Azure Subscription.
 
 ## Others:
 
@@ -195,11 +197,15 @@ Posts are kept stored in the DB with the original id, and the HashId is generate
 
 8. Open the main solution file `ProCodeGuide.Samples.BrokenAccessControl.sln` in Visual Studio (Rider or your IDE of preference).
 
-9. Build the application in order to publish it as a package (you can use extensions to directly deploy to your created resources). Ensure that the `appsettings.json` contains the correct connection string to the SQL Server instance and the correct database name as well as the `Hashids` section for the 'Final' (the fixed one) project.
+9. Ensure that the `appsettings.json` contains the correct connection string to the SQL Server instance and the correct database name as well as the `Hashids` section for the 'Final' (the fixed one) project.
 
-10. Wait until the deployment finishes.
+10. Run the database migrations in both `ProCodeGuide.Samples.BrokenAccessControl` projects by executing `dotnet ef database update` (you may need to install the `dotnet-ef` tool first) in the `./broken-access-control/ProCodeGuide.Samples.BrokenAccessContrrol/Final` and `./broken-access-control/ProCodeGuide.Samples.BrokenAccessContrrol/Initial` folder.
 
-11. You are done! You can access both vulnerable and "security hardened" versions of the web in different URLs and check for the main vulnerability to exploit.
+11. Build the application in order to publish it as a package (you can use extensions to directly deploy to your created resources). 
+
+12. Wait until the deployment finishes.
+
+13. You are done! You can access both vulnerable and "security hardened" versions of the web in different URLs and check for the main vulnerability to exploit.
 
 _**Note:** the deployed resources incur in charges, make sure to stop/delete the web apps and SQL server to reduce charges._
 
@@ -226,24 +232,69 @@ This repository has been modified to **upgrade dependencies**.
 <summary>**View more about this demo**</summary>  
 
 **Video explanation:** [Youtube](https://www.youtube.com/watch?v=cIGESSm39n4).
+
 **Related article:** [Substack](https://mattfrisbie.substack.com/p/spy-chrome-extension).
 
 ### Building the extension
 
-WIP
+_**Note:** the extension is build and zipped ready to use by the action available in the repository at [.github/workflows/build-spy-extension.yml](./.github/workflows/build-spy-extension.yml). You can go to the related action and download the artifact from the last run._
+
 **Step by step:**
 
+1. Clone this repository in your shell: `git clone https://github.com/rpiraces-plain/dotnet2023`
 
-### Installing and inspecting the extension
-WIP
+2. Get into the folder `./spy-extension` folder of this repository by executing `cd dotnet2023/spy-extension`.
+
+3. Install the dependencies by executing `yarn` (ensure you have [Yarn 1.x](https://classic.yarnpkg.com/en/) installed).
+
+4. Build the extension by executing `yarn build`.
+
+5. You are done! You can [load the extension unpacked](https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked) (will be available at the path `./spy-extension/dist`) in your browser and check for the main vulnerability to exploit.
+
+### Inspecting the extension
+
+Once you have the extension loaded in your browser, you can inspect it by going to the [Extensions page](chrome://extensions):
+![spy-extension installed](/assets/spy-extension-installed.png)
+
+Take a look at the details of the extension (you will notice the vast amount of permissions it requires, used to spy on the user):
+![spy-extension extension details](/assets/spy-extension-details.png)
+
+Try now to navigate a little bit and open the extension popup (it looks pretty legit):
+![spy-extension popup](/assets/spy-extension-popup.png)
+
+Now click on the extension logo and in the "The goods" button to see the data collected by the extension (it will be opened in a new tab):
+![spy-extension dashboard](/assets/spy-extension-dashboard.png)
+
+It's pretty impressive all the data it has been collecting... You can click on the buttons to collect more data such as "Cookies", which will be used in the next step.
 
 ### Main vulnerability to exploit
 
-WIP
+Since the extension is spying on the user, it is collecting all the cookies from all the websites the user visits. This means that if the user visits a website with a session cookie, the extension will be able to collect it and send it to the attacker.
 
-### Detecting the vulnerability and attempting to stop it before reaeching production
+We are going to simulate an account takeover at [GitHub.com](https://github.com/) by using the extension to collect the session cookie of the user and then use it to login into the user account in another browser.
 
-WIP
+**Step by step:**
+
+1. We will be using two browsers, one with the extension installed and another one without it. Open the browser without the extension and go to [GitHub.com](https://github.com/) and log in to your account.
+
+2. Open the browser with the extension and go to [GitHub.com](https://github.com/) and click on the extension logo and in the "The goods" button to see the data collected by the extension (it will be opened in a new tab).
+
+3. Click on the "Cookies" button and search for all cookies related with GitHub. Copy the values of the cookie in the format displayed in your clipboard.
+
+4. Go to the second browser, install the [Cookie-Editor](https://cookie-editor.cgagnier.ca/) extension (this is a legitimate extension that allows you to edit your cookies) and open it.
+
+5. Go to Github.com, click on the "Cookie-Editor" button and then on the "Import" button. Paste the values of the cookie you copied in the previous step and click on the "Import" button (make sure to surrond the copied values by brackets `[` and `]`).
+
+6. Refresh the page and you will be logged in as the user you spied on! Success!
+
+
+### Detecting the vulnerability and attempting to stop it
+
+You have to be very cautious with these... Do not ever install an extension that you do not trust. If you are not sure about an extension, you can check the source code of the extension (if it is open source) or you can check the permissions it requires (if it requires a lot of permissions, it is kind of suspicious).
+
+You can also check if this extension it's listed in the [Chrome Web Store](https://chrome.google.com/webstore/category/extensions), or the store for your browser (it is not, so it is not a good sign).
+
+There are also some AVs that can detect malicious extensions.
 
 </details>
 
