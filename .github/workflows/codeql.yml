@@ -42,6 +42,10 @@ jobs:
     name: "CodeQL(${{ matrix.languages }}): ${{matrix.target-dir}}"
     needs: generate-scan-list
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.generate-scan-list.outputs.matrix) }}
