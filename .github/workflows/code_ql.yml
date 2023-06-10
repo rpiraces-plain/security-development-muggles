@@ -7,6 +7,7 @@ jobs:
   generate-scan-list:
     name: Generate scan list
     runs-on: ubuntu-latest
+    permissions: write-all
     outputs:
       matrix: ${{steps.set-matrix.outputs.matrix}}
 
