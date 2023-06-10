@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Add Movie";
+}
+@model MovieListItem
+
+<h1>Add to List</h1>
+
+<div class="row">
+    <div class="col-6">
+        <form asp-action="AddToList" 
+              asp-antiforgery="false"> <!--Watch out! Insecure code-->
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Chapters" class="control-label"></label>
+                <input asp-for="Chapters" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Score" class="control-label"></label>
+                <input asp-for="Score" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add to List" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ShowList">Return to the list</a>
+</div>

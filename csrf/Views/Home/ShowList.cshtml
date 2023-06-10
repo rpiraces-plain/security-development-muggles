@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Movie List";
+}
+@model IEnumerable<MovieListItem>
+
+<h1>Add a movie / serie</h1>
+
+<p>
+    <a asp-action="AddToList">Add new item</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chapters)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Score)
+            </th>
+            <th>
+                Acumulated score
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in (Model ?? new MovieListItem[] { }))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Chapters)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Score)
+                </td>
+                <td>
+                    @(item.Chapters * item.Score)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!--Watch out! Insecure code-->
+<form asp-action="ClearList" asp-antiforgery="false">
+    <input type="submit" class="btn btn-primary" value="Clear List">
+</form>

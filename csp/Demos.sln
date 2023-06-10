@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSP", "CSP.csproj", "{7D819BC8-E452-4664-A3BC-3F1B9238F2C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickJacking", "..\ClickJacking\ClickJacking.csproj", "{425BC7C1-CD28-4037-8A75-518C9C79933B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickJacking", "..\ClickJacking\ClickJacking.csproj", "{425BC7C1-CD28-4037-8A75-518C9C79933B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSRF", "..\csrf\CSRF.csproj", "{2E74FC29-EB0B-46B0-8287-507003AC4798}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{425BC7C1-CD28-4037-8A75-518C9C79933B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{425BC7C1-CD28-4037-8A75-518C9C79933B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{425BC7C1-CD28-4037-8A75-518C9C79933B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E74FC29-EB0B-46B0-8287-507003AC4798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E74FC29-EB0B-46B0-8287-507003AC4798}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E74FC29-EB0B-46B0-8287-507003AC4798}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E74FC29-EB0B-46B0-8287-507003AC4798}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
