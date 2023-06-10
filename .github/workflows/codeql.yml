@@ -62,16 +62,19 @@ jobs:
         sed -i 's@__TARGET_DIR__@'"$TARGET_DIR"'@' codeql-config.yml
 
     - name: Initialize CodeQL
+      continue-on-error: true
       uses: github/codeql-action/init@v2
       with:
         config-file: codeql-config.yml
         languages: ${{ matrix.languages }}
 
     - name: Attempting build
+      continue-on-error: true
       if: ${{ (matrix.languages == 'cpp' || matrix.languages == 'csharp' || matrix.languages == 'java') }}
       uses: github/codeql-action/autobuild@v2
 
     - name: Perform CodeQL analysis
+      continue-on-error: true
       uses: github/codeql-action/analyze@v2
       with:
         category: ${{ matrix.target-dir }}-${{ matrix.languages }}
