@@ -14,21 +14,3 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         target: 'https://juice-shop.herokuapp.com/'
-
-    - name: Upload json report as Build Artifact
-      uses: actions/upload-artifact@v3.1.2
-      with:
-        name: scan_reports
-        path: ./report_json.json
-
-    - name: Upload markdown report as Build Artifact
-      uses: actions/upload-artifact@v3.1.2
-      with:
-        name: scan_reports
-        path: ./report_md.md
-
-    - name: Upload HTML report as Build Artifact
-      uses: actions/upload-artifact@v3.1.2
-      with:
-        name: scan_reports
-        path: ./report_html.html
