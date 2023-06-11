@@ -1,0 +1,13 @@
+name: OWASP Zap full-scan
+on:
+  workflow_dispatch:
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan the Juice Shop webapplication
+    steps:
+    - name: ZAP Scan
+      uses: zaproxy/action-full-scan@v0.4.0
+      with:
+        target: 'https://juice-shop.herokuapp.com/'
