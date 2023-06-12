@@ -1,0 +1,23 @@
+﻿@page
+@model Cookies.Pages.CookiesGetModel
+@{
+    ViewData["Title"] = "Cookie Get";
+    var browserAndTimeCookie = HttpContext.Request.Cookies["BrowserAndTime"];
+    var insecureCookie = HttpContext.Request.Cookies["Dotnet2023Key"];
+}
+
+<div class="text-center">
+    <h1>[GET] - Playing with Cookies</h1>
+    <form method="post">
+        <div class="m-4">
+            <p>
+                Time Cookie:
+                @browserAndTimeCookie
+            </p>
+            <p>
+                Insecure Cookie:
+                @insecureCookie
+            </p>
+        </div>
+    </form>
+</div>

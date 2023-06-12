@@ -1,0 +1,17 @@
+﻿@page
+@model Cookies.Pages.CookiesModel
+@{
+    ViewData["Title"] = "Cookie Set";
+}
+
+<div class="text-center">
+    <h1>[SET] - Playing with Cookies</h1>
+    <form method="post">
+        <div class="m-4">
+            <p>Cookies Set: @Model.CookieValue</p>
+        </div>
+        <div class="mb-2">
+            <a asp-page="CookiesGet">Check the cookies!</a>
+        </div>
+    </form>
+</div>
