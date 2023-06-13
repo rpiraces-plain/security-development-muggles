@@ -30,6 +30,11 @@ namespace Demos.Pages
             HttpContext.Response.Headers.Add(
                 "Content-Security-Policy",
                 cspHeader);
+
+            // Recommended now - CSP Level 3
+            //HttpContext.Response.Headers.Add(
+            //    "Content-Security-Policy-Report-Only",
+            //    cspHeader);
         }
     }
 }
