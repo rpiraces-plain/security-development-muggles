@@ -24,6 +24,7 @@ namespace Demos.Pages
             //    "'sha256-cr42sjoWSSOFzzQSZXmLpq70OHNKYvOVmFo9ESrqcH0=' " +
             //    "'sha256-soFsOlcTWUItmB90RcCrKNGsLynvO+BSiqpMz8ETGTI='; " +
             //    "script-src 'self' https://cdn.jsdelivr.net 'sha256-aHqAVaN96ItafhbwPKIgMhwFrHlzzIoGL2jOqxNZxDM=' 'unsafe-eval'; " + // Allows the updateCount function
+            //                                                                                                                         // Try to avoid whitelisting the whole CDN, it will make possible loading versions of your libaries that might be compromised.
             //    "report-uri /collect;" + // Report endpoint in our server
             //    "connect-src wss://localhost:*"; // Web socket for debugging (local dev)
 
