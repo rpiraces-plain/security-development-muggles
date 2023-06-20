@@ -95,7 +95,7 @@ Go to the actions tab, and select the workflow "CI Build for spy-extension", and
 
 **LICENSE: [MIT](./azure-goat/LICENSE)**
 
-This repository has been modified to **avoid to deploy extra unneded resources for this demo**, such as VMs, runbooks and others...
+This repository has been modified to **avoid to deploy extra unneeded resources for this demo**, such as VMs, runbooks and others...
 
 <details>
 
@@ -111,7 +111,7 @@ This repository has been modified to **avoid to deploy extra unneded resources f
 
 2. Create an empty resource group with the name `azuregoat_app`.
 
-3. Open an Azure Cloud shell in the portal (note: this needs an storage account, that you can create when initializing the shell the first time, which may incur in aditional charges).
+3. Open an Azure Cloud shell in the portal (note: this needs an storage account, that you can create when initializing the shell the first time, which may incur in additional charges).
 
 4. Clone this repository in your shell: `git clone https://github.com/rpiraces-plain/dotnet2023`
 
@@ -129,7 +129,7 @@ _**Note:** the deployed resources incur in charges, make sure to stop the functi
 
 ### Main vulnerability to exploit
 
-The application has several vulnerabilities and weeknesses, but the main one that we are going to demonstrate is the following:
+The application has several vulnerabilities and weaknesses, but the main one that we are going to demonstrate is the following:
 
 [SSRF](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery) in the user portal, when submitting a new post.
 
@@ -143,7 +143,7 @@ When we are logged in the application, we can create a new post, and we can spec
 
 When submitting by clicking the "Upload" button and keeping open the browser "Dev Tools" we can see the request being made to the internal resource, which will return the content of the file in a invalid png file we can download (copying the URL sent in the request in the body property of the JSON object sent in the response):
 
-![Request successfull, SSRF executed](/assets/ssrf-request-successful.png)
+![Request successful, SSRF executed](/assets/ssrf-request-successful.png)
 
 When we open the downloaded image in a text editor (such as Notepad++, VSCode or others), we can see the content of the file we requested:
 
@@ -151,9 +151,9 @@ When we open the downloaded image in a text editor (such as Notepad++, VSCode or
 
 From there, we can use the leaked credentials to access the Cosmos database and the storage account, and get more information from there (or modify it, or delete it...).
 
-**Explotation steps:** [Youtube](https://www.youtube.com/watch?v=TVFdorqj2oQ&list=PLcIpBb4raSZGdYHKpqIu5Boc2ziga4oGY&index=2) (specifically the videos named "AzureGoat Exploitation : Server Side Request Forgery Part 1" and "AzureGoat Exploitation : Server Side Request Forgery Part 2").
+**Exploitation steps:** [Youtube](https://www.youtube.com/watch?v=TVFdorqj2oQ&list=PLcIpBb4raSZGdYHKpqIu5Boc2ziga4oGY&index=2) (specifically the videos named "AzureGoat Exploitation : Server Side Request Forgery Part 1" and "AzureGoat Exploitation : Server Side Request Forgery Part 2").
 
-### Detecting the vulnerability and attempting to stop it before reaeching production
+### Detecting the vulnerability and attempting to stop it before reaching production
 
 Using static analysis tools, we can detect the vulnerability before deploying the application to production.
 In this case we have a [GitHub Action](https://github.com/rpiraces-plain/dotnet2023/actions/workflows/security_scan.yml) which runs the following tools:
@@ -229,7 +229,7 @@ This is a [A01 – Broken Access Control](https://owasp.org/Top10/A01_2021-Broke
 
 We will fix this vulnerability in the "Final" version.
 
-### Detecting the vulnerability and attempting to stop it before reaeching production
+### Detecting the vulnerability and attempting to stop it before reaching production
 
 One of the best ways to avoid this is to ensure that we understand the actual logic of our app and make authorization tests that run in our CI pipeline.
 Using these approach we will be checking for all cases and ensuring the authorization is working as expected for all cases.
@@ -322,7 +322,7 @@ Success! We are now in the administration page! 🎉 And look! We can perform ad
 
 What failed here?
 
-### Detecting the vulnerability and attempting to stop it before reaeching production
+### Detecting the vulnerability and attempting to stop it before reaching production
 
 First of all, **all client side code is subject to be modified by the user, so we cannot trust it. We should always validate the data in the server side.**
 
@@ -403,7 +403,7 @@ We are going to simulate an account takeover at [GitHub.com](https://github.com/
 
 4. Go to the second browser, install the [Cookie-Editor](https://cookie-editor.cgagnier.ca/) extension (this is a legitimate extension that allows you to edit your cookies) and open it.
 
-5. Go to Github.com, click on the "Cookie-Editor" button and then on the "Import" button. Paste the values of the cookie you copied in the previous step and click on the "Import" button (make sure to surrond the copied values by brackets `[` and `]`).
+5. Go to Github.com, click on the "Cookie-Editor" button and then on the "Import" button. Paste the values of the cookie you copied in the previous step and click on the "Import" button (make sure to surround the copied values by brackets `[` and `]`).
 
 6. Refresh the page and you will be logged in as the user you spied on! Success!
 
@@ -417,6 +417,24 @@ You can also check if this extension it's listed in the [Chrome Web Store](https
 There are also some AVs that can detect malicious extensions.
 
 </details>
+
+## clickjacking
+The core idea of this demo is to understand the necessity of implementing the right headers in your backend. In this scenario, the key point is a header that can control in which domains you can load your webpage. 
+
+To have an initial idea of what a clickjacking is, check the following image:
+
+![Clickjacking image](https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/11-Client_Side_Testing/images/Clickjacking_description.png)
+*Source: OWASP*
+
+Next, if wou want to fully understand and perform the attack, check the `./clickjacking` folder, you will find the code and documentation.
+
+## cookies
+We have been told that cookies are evil, and indeed they can be. However, as a standard mechanism to work with the user session of an application, there are security protections in place we can user in order to make them safe to use.
+
+In this demo we will discuss the topics `SameSite, HttpOnly and Secure`. 
+**Note:** Keep in mind that browsers are becoming stricter with cookies every day. Check this chromium [article](https://www.chromium.org/updates/same-site/).
+
+If you want to dig deeper into cookies, have a look at the `./cookies` folder. There wou will find how to protect them and further documentation to help you out securing them.
 
 # Disclaimer
 
