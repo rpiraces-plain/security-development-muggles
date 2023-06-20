@@ -7,6 +7,12 @@ We will be testing this hashes using predictable passwords. To do so, we will ch
 Finally, in order to test this code, we will be using Jupyter Notebooks with Docker. Attached in the `./src` folder there is a notebook that we can load and execute with Jupyter.
 
 ## Setup
+
+### Google Colab
+Just open the following URL, trust the code and start running: [https://colab.research.google.com/github/rpiraces-plain/dotnet2023/blob/main/hashes/src/Hashes_salt.ipynb](https://colab.research.google.com/github/rpiraces-plain/dotnet2023/blob/main/hashes/src/Hashes_salt.ipynb)
+
+### Locally
+
 Just run `docker container run -p 8888:8888 jupyter/demo` and open your favourite browser with the link that the terminal is going to give you: `http://localhost:8888/?token=123....`
 
 Once inside, **upload** the Hashes_salt.ipynb file from the browser and open it.
