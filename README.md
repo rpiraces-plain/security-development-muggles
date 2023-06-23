@@ -419,22 +419,60 @@ There are also some AVs that can detect malicious extensions.
 </details>
 
 ## clickjacking
-The core idea of this demo is to understand the necessity of implementing the right headers in your backend. In this scenario, the key point is a header that can control in which domains you can load your webpage. 
-
-To have an initial idea of what a clickjacking is, check the following image:
+First, to have an initial idea of what a clickjacking is, check the following image:
 
 ![Clickjacking image](https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/11-Client_Side_Testing/images/Clickjacking_description.png)
 *Source: OWASP*
 
-Next, if wou want to fully understand and perform the attack, check the `./clickjacking` folder, you will find the code and documentation.
+In short, the clickjacking attack is an UI trick where the attacker hides several layers that  represent different domains, causing the user to click in a button or link, thinking that will cause an specific action in the top window, when it is really clicking somewhere else. This is a behavior usually seen in terms of aggressive advertisement in domains that inject you malware or any other unwanted application. "The attacker *hijacks* the user clicks."
+
+The core idea of this demo is to understand the necessity of implementing the right headers in your backend. We will defend our web applications blocking any unwanted framing in any third party domain. To do so, the key lies in an HTTP header that can control in which domains you can load your webpage. In this demo, we will see two options to configure this security measure.
+
+
+Finally, if wou want to fully understand and perform the attack, check the `./clickjacking` folder, you will find the code and documentation.
 
 ## cookies
-We have been told that cookies are evil, and indeed they can be. However, as a standard mechanism to work with the user session of an application, there are security protections in place we can user in order to make them safe to use.
+We have been told that cookies are evil, and indeed they can be. However, as a standard mechanism to work with the user session of an application, there are security protections in place we can use in order to make them safe to go.
 
-In this demo we will discuss the topics `SameSite, HttpOnly and Secure`. 
-**Note:** Keep in mind that browsers are becoming stricter with cookies every day. Check this chromium [article](https://www.chromium.org/updates/same-site/).
+In this demo we will discuss the topics `SameSite, HttpOnly and Secure`. In short, what dangers we can face if we don't set the right flags for our cookies. For example, we could potentially modify information set beforehand in them.
 
-If you want to dig deeper into cookies, have a look at the `./cookies` folder. There wou will find how to protect them and further documentation to help you out securing them.
+If you want to dig deeper into cookies, have a look at the `./cookies` folder. There you will find how to protect them and further documentation to help you out securing them.
+
+**Important Note:** Keep in mind that browsers are becoming stricter with cookies every day. Check this chromium [article](https://www.chromium.org/updates/same-site/) if you are working with iframes, or cross-site domains as a regular basis for your business (among others).
+
+## Content Security Policy (CSP)
+As OWASP describes it, CSP is an extra layer to defend our applications mainly against Cross-Site Scripting (XSS) and injection attacks. With CSP you can control where are the sources of your scripts, fonts, images, audios, videos (and so on) coming from.
+
+In other words, your browser will only accept resources coming from a whitelist of domains you provide. It even gives you the opportunity of providing different domains for several types of resources. With this approach, we mitigate the impact of potential XSS and injection attacks. The attacker has fewer options of injecting specific code to compromise the application.
+
+If you want to check the demo, there is an initial broken scenario that you can try to fix. Jump right into it at the `./csp` folder.
+
+## Cross-Site Request Forgery (CSRF)
+A CSRF is a type of attack where the user is authenticated in a given application, and the attacker takes advantage of that session sending an unwanted request that the server thinks its valid. This malicious request can be triggered, for example, from a link inside an email (phishing).
+
+The key lies in the requests themselves, they are **predictable**. You just need to investigate any request in your browser opening the developer tools. You will realize that the endpoint and the payload can be guessed. If we add that to the fact that the user is authenticated in an application, we can forge an attack performing unwanted actions: changing the password, buying an item, deleting our account, etc.
+
+Therefore, if we want to "randomize" those requests, so an attacker can not simply perform the attack, that is where the CSRF tokens come in handy.
+
+Check the folder `./csrf` to play around with the demo and discover how to implement these tokens.
+
+## Hashes
+Hashes, cryptography... they are usually misunderstood even though they represent the base of any secure communication. But what is a hash? We can say that it is a function that resolves an specific string for a given input. The magic comes with the algorithm that will resolve the same-size `hashed_input` no matter how large is your `input`.
+
+``` Javascript
+// 
+function hash(input) {
+    hashed_input = algorithm_hash(input);
+    return hashed_input;
+}
+```
+Moreover, hashes have the characteristic that always resolve the same `hashed_input` for the same input, no matter how many times you try, the MD5 hash of `1234Qwert` is `4afb3b269893ba18266b68feb7e222e7`. What it is even more interesting is that you should never find the same `hashed_input` for two different `inputs`.
+
+However, why do we need hashes? We usually need hashes for the user passwords. We **NEVER** want to store them in plain text, right? Because if we end there, we take the risk of eventually compromising all passwords if our database is breached. But are we protected only by hashing our passwords?
+
+No. To protect our passwords we must at least use salt, which adds a secret string to every `input` so the computed `hashed_input` is not easily guessed. If you want to test a simple example, have a look at the demo in the `./hashes` folder.
+
+**Note:** Do you know "Have I Been Pwned"? Either way, if you want to understand why you should select a good password, and a good password policy, check the demo folder as well. 
 
 # Disclaimer
 

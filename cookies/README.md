@@ -20,6 +20,6 @@ We were able to to modify its value because of the configuration we set to these
 ## Defense
 First, check the configuration we set for the cookies in the 'Program.cs', lines 4-10. We have set **HttpOnly**, which means cookies can not be accessed from JavaScript; we have set **Secure**, which means cookies will only be transmitted over HTTPS channels; and finally, we have set the **SameSite** attribute, which controls if cookies will be sent alongside with requests depending on the site we are targeting.
 
-On the other hand, if you want to check the specific configuration we set for the **unprotected** cookie, have a look at the lines 25-30 of the file `Pages/CookiesSet.cshtml.cs` This is an example of what should NOT be done.
+On the other hand, if you want to check the specific configuration we set for the **unprotected** cookie, have a look at the lines 25-30 of the file `Pages/CookiesSet.cshtml.cs` This is an example of what should **NOT** be done.
 
 Finally, we recommend you to carefully read the documentation at `https://localhost:6001/`, to fully understand how to protect them. 
