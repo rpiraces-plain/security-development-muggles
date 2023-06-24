@@ -3,6 +3,8 @@
 
 This repository contains demos performed in the "Desarrollo seguro para Muggles" talk in the dotnet2023 tech conference.
 
+Checkout the official [Slides](./assets/dotNET2023_Desarrollo%20Seguro%20para%20Muggles.pdf).
+
 # Available actions
 
 In this repository we have enabled several [GitHub Actions](https://docs.github.com/en/actions) to perform different tasks, listed below.
