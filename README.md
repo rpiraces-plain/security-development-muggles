@@ -9,7 +9,9 @@ Checkout the official [Slides](./assets/dotNET2023_Desarrollo%20Seguro%20para%20
 
 In this repository we have enabled several [GitHub Actions](https://docs.github.com/en/actions) to perform different tasks, listed below.
 These are mainly focused to perform security analysis of the code, and to detect vulnerabilities in the code and in the dependencies.
-The are other actions to simply build some of the demos and provide them out-of-the-box to use them.
+There are other actions to simply build some of the demos and provide them out-of-the-box to use them.
+
+_**Note:** all of this actions can be executed in any CI/CD platform (we have no vendor lock-in), since the tools are available as binaries and docker images in some cases. Also you can try out the [nektos/act](https://github.com/nektos/act) project, which allows you to run this actions locally (or in other machine)._
 
 ## CodeQL Scan
 
@@ -97,6 +99,8 @@ Go to the actions tab, and select the workflow "CI Build for spy-extension", and
 
 **LICENSE: [MIT](./azure-goat/LICENSE)**
 
+**Videos: [Explotation demo]().**
+
 This repository has been modified to **avoid to deploy extra unneeded resources for this demo**, such as VMs, runbooks and others...
 
 <details>
@@ -183,6 +187,10 @@ _**Note**: regarding the credentials obtained in the SSRF with `file:///home/sit
 
 **Upstream repository (from [Pro Code Guide](https://github.com/procodeguide), [Pro Code Guide web](https://procodeguide.com)):** https://github.com/procodeguide/ProCodeGuide.Samples.BrokenAccessControl
 
+**Videos:** 
+- [Enumeration and broken access demo](https://youtu.be/xG5uQqAjbhI).
+- [Fixed broken access demo](https://youtu.be/DySw_QW0fRQ).
+
 This repository has been modified to **improve security and some customization for this demo**.
 One very important change is the use of [HashIds](https://hashids.org/) for posts ids (instead of sequential numbers), which makes it harder to guess the id of a post and access it.
 Posts are kept stored in the DB with the original id, and the HashId is generated on the fly when needed to be provided to the user.
@@ -259,6 +267,8 @@ Another approach is to make an E2E test with [Playwright](https://playwright.dev
 **LICENSE: [MIT](https://github.com/juice-shop/juice-shop/blob/master/LICENSE)**
 
 **Main web:** [JuiceShop](https://juice-shop.herokuapp.com/).
+
+**Video:** [Explotation demo](https://youtu.be/9eqB6Sr1d8I).
 
 <details>
 
@@ -346,6 +356,8 @@ Other approach could be to use [BurpSuite](https://portswigger.net/burp) or [OWA
 **Upstream repository (from [Matt Frisbie](https://github.com/msfrisbie), [Matt Frisbie web](https://www.mattfriz.com/)):** https://github.com/msfrisbie/spy-extension
 
 **LICENSE: [MIT](./spy-extension/LICENSE)**
+
+**Videos: [Explotation demo](https://youtu.be/chGig0EA784).**
 
 This repository has been modified to **upgrade dependencies**.
 
