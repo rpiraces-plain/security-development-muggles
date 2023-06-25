@@ -14,7 +14,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAntiforgery(options =>
 {
     // When supressed, this code is vulnerable. For educational purposes only
-    options.SuppressXFrameOptionsHeader = false;
+    options.SuppressXFrameOptionsHeader = true;
 });
 
 var app = builder.Build();
@@ -31,8 +31,7 @@ if (!app.Environment.IsDevelopment())
 //app.Use(async (context, next) =>
 //{
 //    context.Response.Headers.Add("Content-Security-Policy",
-//        "default-src 'self';" +
-//        "frame-ancestors: localhost:8888");
+//        "frame-ancestors http://localhost:8888");
 //    await next();
 //});
 
