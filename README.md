@@ -99,7 +99,7 @@ Go to the actions tab, and select the workflow "CI Build for spy-extension", and
 
 **LICENSE: [MIT](./azure-goat/LICENSE)**
 
-**Videos: [Explotation demo]().**
+**Videos: [Explotation demo](https://youtu.be/QyT7Riy56sk).**
 
 This repository has been modified to **avoid to deploy extra unneeded resources for this demo**, such as VMs, runbooks and others...
 
