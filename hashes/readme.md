@@ -13,6 +13,6 @@ Just open the following URL, trust the code and start running: [https://colab.re
 
 ### Locally
 
-Just run `docker container run -p 8888:8888 jupyter/demo` and open your favorite browser with the link that the terminal is going to give you: `http://localhost:8888/?token=123....`
+Just run `docker container run -p 8888:8888 jupyter/base-notebook` and open your favorite browser with the link that the terminal is going to give you: `http://localhost:8888/?token=123....`
 
 Once inside, **upload** the Hashes_salt.ipynb file from the browser and open it.
