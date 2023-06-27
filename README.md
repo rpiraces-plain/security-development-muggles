@@ -3,7 +3,9 @@
 
 This repository contains demos performed in the "Desarrollo seguro para Muggles" talk in the dotnet2023 tech conference.
 
-Checkout the official [Slides](./assets/dotNET2023_Desarrollo%20Seguro%20para%20Muggles.pdf).
+**Check out the official [Slides](./assets/dotNET2023_Desarrollo%20Seguro%20para%20Muggles.pdf).**
+
+**Check out the site [devsec.fyi](https://book.devsec.fyi/) and [its repository](https://github.com/piraces/DevSecTricks) for more resources and info.**
 
 # Available actions
 
@@ -92,6 +94,8 @@ With this extension we can intercept a lot of things that happen in the target b
 Go to the actions tab, and select the workflow "CI Build for spy-extension", and click on the latest run. In the summary details, you can see in the "Artifacts" section the zip ready to download and use.
 
 # Available demos
+
+View all the demos in [this YouTube Playlist](https://www.youtube.com/playlist?list%253DPLGDuNS9I3E3ikuA2l8w8W_VMWdN4LTMGO).
 
 ## azure-goat
 
@@ -432,7 +436,10 @@ There are also some AVs that can detect malicious extensions.
 
 </details>
 
-## clickjacking
+## Clickjacking
+
+**Video:** [explanation demo](https://youtu.be/NVVAaT4_L9U).
+
 First, to have an initial idea of what a clickjacking is, check the following image:
 
 ![Clickjacking image](https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/11-Client_Side_Testing/images/Clickjacking_description.png)
@@ -445,7 +452,10 @@ The core idea of this demo is to understand the necessity of implementing the ri
 
 Finally, if wou want to fully understand and perform the attack, check the `./clickjacking` folder, you will find the code and documentation.
 
-## cookies
+## Cookies
+
+**Video:** [explanation demo](https://youtu.be/aXsS7ZZ_btc).
+
 We have been told that cookies are evil, and indeed they can be. However, as a standard mechanism to work with the user session of an application, there are security protections in place we can use in order to make them safe to go.
 
 In this demo we will discuss the topics `SameSite, HttpOnly and Secure`. In short, what dangers we can face if we don't set the right flags for our cookies. For example, we could potentially modify information set beforehand in them.
@@ -455,6 +465,9 @@ If you want to dig deeper into cookies, have a look at the `./cookies` folder. T
 **Important Note:** Keep in mind that browsers are becoming stricter with cookies every day. Check this chromium [article](https://www.chromium.org/updates/same-site/) if you are working with iframes, or cross-site domains as a regular basis for your business (among others).
 
 ## Content Security Policy (CSP)
+
+**Video:** [explanation demo](https://youtu.be/hwNmkZkbnAg).
+
 As OWASP describes it, CSP is an extra layer to defend our applications mainly against Cross-Site Scripting (XSS) and injection attacks. With CSP you can control where are the sources of your scripts, fonts, images, audios, videos (and so on) coming from.
 
 In other words, your browser will only accept resources coming from a whitelist of domains you provide. It even gives you the opportunity of providing different domains for several types of resources. With this approach, we mitigate the impact of potential XSS and injection attacks. The attacker has fewer options of injecting specific code to compromise the application.
@@ -462,6 +475,9 @@ In other words, your browser will only accept resources coming from a whitelist 
 If you want to check the demo, there is an initial broken scenario that you can try to fix. Jump right into it at the `./csp` folder.
 
 ## Cross-Site Request Forgery (CSRF)
+
+**Video:** [explanation demo](https://youtu.be/PSSPMPJqlSE).
+
 A CSRF is a type of attack where the user is authenticated in a given application, and the attacker takes advantage of that session sending an unwanted request that the server thinks its valid. This malicious request can be triggered, for example, from a link inside an email (phishing).
 
 The key lies in the requests themselves, they are **predictable**. You just need to investigate any request in your browser opening the developer tools. You will realize that the endpoint and the payload can be guessed. If we add that to the fact that the user is authenticated in an application, we can forge an attack performing unwanted actions: changing the password, buying an item, deleting our account, etc.
@@ -471,6 +487,9 @@ Therefore, if we want to "randomize" those requests, so an attacker can not simp
 Check the folder `./csrf` to play around with the demo and discover how to implement these tokens.
 
 ## Hashes
+
+**Video:** [explanation demo](https://youtu.be/gZcEUoHG8fk).
+
 Hashes, cryptography... they are usually misunderstood even though they represent the base of any secure communication. But what is a hash? We can say that it is a function that resolves an specific string for a given input. The magic comes with the algorithm that will resolve the same-size `hashed_input` no matter how large is your `input`.
 
 ``` Javascript
