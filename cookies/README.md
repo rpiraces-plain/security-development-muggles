@@ -8,12 +8,12 @@ What do Secure, HttpOnly, Lax, Strict or None means in terms of cookies?
 2. Open the browser at this URL: [https://localhost:6001](https://localhost:6001)
 3. You have two main pages, the `Get Cookies` and the `Set Cookies`
 4. Start by going to the Set Cookies page, and then click the `Check the cookies!` link at the bottom.
-5. Open the dev tools from your browser and check the flags for these two cookies: Dotnet2023Key and BrowserAndTime
+5. Open the dev tools from your browser and check the flags for these two cookies: Insec2023Key and BrowserAndTime
    1. In Chrome, F12, "Application", "Cookies" and select the web page
-6. The Dotnet2023Key is unprotected, and represents a bad practice in development, saving a key or password as the value of the cookie.
+6. The Insec2023Key is unprotected, and represents a bad practice in development, saving a key or password as the value of the cookie.
 7. Try the dev-tool's console, and type `document.cookie`
    
-You should be seeing the Dotnet2023Key, that can be changed right from the console. Chose any new value, update it (document.cookie='') from the console and refresh the `Get Cookies` page. Hacked!
+You should be seeing the Insec2023Key, that can be changed right from the console. Chose any new value, update it (document.cookie='') from the console and refresh the `Get Cookies` page. Hacked!
 
 We were able to to modify its value because of the configuration we set to these cookies. Now we are going to see how to protect them.
 

@@ -9,7 +9,7 @@ Finally, in order to test this code, we will be using Jupyter Notebooks with Doc
 ## Setup
 
 ### Google Colab
-Just open the following URL, trust the code and start running: [https://colab.research.google.com/github/rpiraces-plain/dotnet2023/blob/main/hashes/src/Hashes_salt.ipynb](https://colab.research.google.com/github/rpiraces-plain/dotnet2023/blob/main/hashes/src/Hashes_salt.ipynb)
+Just open the following URL, trust the code and start running: [https://colab.research.google.com/github/rpiraces-plain/security-development-muggles/blob/main/hashes/src/Hashes_salt.ipynb](https://colab.research.google.com/github/rpiraces-plain/security-development-muggles/blob/main/hashes/src/Hashes_salt.ipynb)
 
 ### Locally
 

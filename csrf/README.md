@@ -28,4 +28,4 @@ Start by checking these two files:
 4. The attack shouldn't work now, we are safer than at the beginning!
 
 
-But what if we want to protect every controller from our server instead? We can do that by  adding the code we have in the lines 25-29 in the `Program.cs`.
+But what if we want to protect every controller from our server instead? We can do that by adding the code we have in the lines 25-29 in the `Program.cs`.

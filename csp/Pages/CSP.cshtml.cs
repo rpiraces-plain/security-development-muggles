@@ -14,11 +14,11 @@ namespace Demos.Pages
 
         public void OnGet()
         {
-            // 1บ Iteration: Collect endpoint and all blocked
+            // 1ยบ Iteration: Collect endpoint and all blocked
             var cspHeader = "default-src 'self'; report-uri /collect";
 
             //var cspHeader = "default-src 'self'; " +
-            //    "img-src 'self' https://dotnetconfspain.com/wp-content/webp-express/webp-images/uploads/2023/04/; " +
+            //    "img-src 'self' https://cdn.plainconcepts.com/wp-content/uploads/2021/10/; " +
             //    "style-src 'self' https://cdn.jsdelivr.net 'unsafe-hashes' " + // Inline style hashes
             //    "'sha256-yckz1zrIL2HgQwm7x1ins99s5jndZE3XnmgOAkJvDOg=' " +
             //    "'sha256-cr42sjoWSSOFzzQSZXmLpq70OHNKYvOVmFo9ESrqcH0=' " +

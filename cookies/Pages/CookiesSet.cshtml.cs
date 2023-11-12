@@ -28,7 +28,7 @@ namespace Cookies.Pages
                 HttpOnly = false,
                 SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None
             };
-            Response.Cookies.Append("Dotnet2023Key", "1234Qwert");
+            Response.Cookies.Append("Insec2023Key", "1234Qwert");
 
         }
     }

@@ -1,9 +1,14 @@
-# [dotnetconf 2023](https://dotnetconfspain.com/) - Desarrollo seguro para Muggles
+# Desarrollo seguro para Muggles
 
 
-This repository contains demos performed in the "Desarrollo seguro para Muggles" talk in the dotnet2023 tech conference.
+This repository contains demos performed in the "Desarrollo seguro para Muggles" talk.
 
-**Check out the official [Slides](./assets/dotNET2023_Desarrollo%20Seguro%20para%20Muggles.pdf).**
+**Check out the official slides for:**
+
+1. dotnet2023 [Slides](./assets/dotNET2023_Desarrollo%20Seguro%20para%20Muggles.pdf).
+2. netcoreconf 
+
+
 
 **Check out the site [devsec.fyi](https://book.devsec.fyi/) and [its repository](https://github.com/piraces/DevSecTricks) for more resources and info.**
 
@@ -123,9 +128,9 @@ This repository has been modified to **avoid to deploy extra unneeded resources 
 
 3. Open an Azure Cloud shell in the portal (note: this needs an storage account, that you can create when initializing the shell the first time, which may incur in additional charges).
 
-4. Clone this repository in your shell: `git clone https://github.com/rpiraces-plain/dotnet2023`
+4. Clone this repository in your shell: `git clone https://github.com/rpiraces-plain/security-development-muggles.git`
 
-5. Get into the folder `./azure-goat` folder of this repository by executing `cd dotnet2023/azure-goat`.
+5. Get into the folder `./azure-goat` folder of this repository by executing `cd security-development-muggles/azure-goat`.
 
 6. Once in the folder, initialize the terraform state by executing `terraform init`.
 
@@ -166,7 +171,7 @@ From there, we can use the leaked credentials to access the Cosmos database and 
 ### Detecting the vulnerability and attempting to stop it before reaching production
 
 Using static analysis tools, we can detect the vulnerability before deploying the application to production.
-In this case we have a [GitHub Action](https://github.com/rpiraces-plain/dotnet2023/actions/workflows/security_scan.yml) which runs the following tools:
+In this case we have a [GitHub Action](https://github.com/rpiraces-plain/security-development-muggles/actions/workflows/security_scan.yml) which runs the following tools:
 - [Trivy](https://aquasecurity.github.io/trivy): has multiple scanners that look for security issues, and targets where it can find those issues.
 - [TruffleHog](https://github.com/trufflesecurity/trufflehog): to find and verify credentials in this repo.
 - [tfsec](https://aquasecurity.github.io/tfsec): to find security issues in the terraform code.
@@ -217,9 +222,9 @@ Posts are kept stored in the DB with the original id, and the HashId is generate
 
 5. Create two Web Apps in the App Service Plan, try to give them different and coherent names to differentiate them.
 
-6. Clone this repository in your shell: `git clone https://github.com/rpiraces-plain/dotnet2023`
+6. Clone this repository in your shell: `git clone https://github.com/rpiraces-plain/security-development-muggles`
 
-7. Get into the folder `./broken-access-control` folder of this repository by executing `cd dotnet2023/broken-access-control`.
+7. Get into the folder `./broken-access-control` folder of this repository by executing `cd security-development-muggles/broken-access-control`.
 
 8. Open the main solution file `ProCodeGuide.Samples.BrokenAccessControl.sln` in Visual Studio (Rider or your IDE of preference).
 
@@ -379,9 +384,9 @@ _**Note:** the extension is build and zipped ready to use by the action availabl
 
 **Step by step:**
 
-1. Clone this repository in your shell: `git clone https://github.com/rpiraces-plain/dotnet2023`
+1. Clone this repository in your shell: `git clone https://github.com/rpiraces-plain/security-development-muggles`
 
-2. Get into the folder `./spy-extension` folder of this repository by executing `cd dotnet2023/spy-extension`.
+2. Get into the folder `./spy-extension` folder of this repository by executing `cd security-development-muggles/spy-extension`.
 
 3. Install the dependencies by executing `yarn` (ensure you have [Yarn 1.x](https://classic.yarnpkg.com/en/) installed).
 
