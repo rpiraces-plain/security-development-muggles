@@ -1,0 +1,14 @@
+trigger:
+- main
+
+pool: SelfHosted
+
+steps:
+- script: docker run --rm -v .:/workspace aquasec/trivy fs --format sarif -o /workspace/trivy-results.sarif --severity UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL --scanners vuln,secret,config /workspace
+  displayName: 'Run Trivy vulnerability scanner'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'trivy-results.sarif'
+    ArtifactName: 'CodeAnalysisLogs'
+    publishLocation: 'Container'

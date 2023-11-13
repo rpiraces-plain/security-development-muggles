@@ -1,0 +1,19 @@
+trigger:
+- main
+
+pool: SelfHosted
+
+variables:
+  advancedsecurity.codeql.querysuite: security-extended
+  advancedsecurity.submittoadvancedsecurity: true
+
+steps:
+  - task: AdvancedSecurity-Codeql-Init@1
+    inputs:
+      languages: "csharp,python,javascript"
+
+  - task: AdvancedSecurity-Codeql-Autobuild@1
+
+  - task: AdvancedSecurity-Dependency-Scanning@1
+
+  - task: AdvancedSecurity-Codeql-Analyze@1

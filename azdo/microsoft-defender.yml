@@ -1,0 +1,5 @@
+trigger: none
+pool: SelfHosted
+steps:
+- task: MicrosoftSecurityDevOps@1
+  displayName: 'Microsoft Security DevOps'
