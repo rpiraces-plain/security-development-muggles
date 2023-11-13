@@ -1,13 +1,15 @@
-# Desarrollo seguro para Muggles
+# Secure development for Muggles
+[![CodeQL Scan](https://github.com/rpiraces-plain/security-development-muggles/actions/workflows/codeql.yml/badge.svg)](https://github.com/rpiraces-plain/security-development-muggles/actions/workflows/codeql.yml)
+[![Microsoft Defender For Devops](https://github.com/rpiraces-plain/security-development-muggles/actions/workflows/microsoft_defender_devops.yml/badge.svg)](https://github.com/rpiraces-plain/security-development-muggles/actions/workflows/microsoft_defender_devops.yml)
+[![Security Scan](https://github.com/rpiraces-plain/security-development-muggles/actions/workflows/security_scan.yml/badge.svg)](https://github.com/rpiraces-plain/security-development-muggles/actions/workflows/security_scan.yml)
+[![OWASP Zap full-scan](https://github.com/rpiraces-plain/security-development-muggles/actions/workflows/owasp_zap.yml/badge.svg)](https://github.com/rpiraces-plain/security-development-muggles/actions/workflows/owasp_zap.yml)
 
-
-This repository contains demos performed in the "Desarrollo seguro para Muggles" talk.
+This repository contains demos performed in the "Secure development for Muggles" talk.
 
 **Check out the official slides for:**
 
 1. dotnet2023 [Slides](./assets/dotNET2023_Desarrollo%20Seguro%20para%20Muggles.pdf).
-2. netcoreconf 
-
+2. NetCoreConf 2023 [Slides](./assets/TODO).
 
 
 **Check out the site [devsec.fyi](https://book.devsec.fyi/) and [its repository](https://github.com/piraces/DevSecTricks) for more resources and info.**
