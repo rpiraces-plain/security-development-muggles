@@ -494,7 +494,7 @@ Therefore, if we want to "randomize" those requests, so an attacker can not simp
 Check the folder `./csrf` to play around with the demo and discover how to implement these tokens.
 
 ## Hashes
-[![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/Index.ipynb)
+[![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rpiraces-plain/security-development-muggles/blob/main/hashes/src/Hashes_salt.ipynb)
 
 **Video:** [explanation demo](https://youtu.be/gZcEUoHG8fk).
 
