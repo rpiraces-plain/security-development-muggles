@@ -9,7 +9,7 @@ This repository contains demos performed in the "Secure development for Muggles"
 **Check out the official slides for:**
 
 1. dotnet2023 [Slides](./assets/dotNET2023_Desarrollo%20Seguro%20para%20Muggles.pdf).
-2. NetCoreConf 2023 [Slides](./assets/TODO).
+2. NetCoreConf 2023 [Slides](./assets/netcoreconf_Secure_Development_for_Muggles_2023.pdf).
 
 
 **Check out the site [devsec.fyi](https://book.devsec.fyi/) and [its repository](https://github.com/piraces/DevSecTricks) for more resources and info.**
